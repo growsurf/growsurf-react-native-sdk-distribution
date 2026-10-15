@@ -1,5 +1,10 @@
 # Release notes
 
+## 0.1.1
+
+- Reports `MISSING_PARTICIPANT_TOKEN` through the Window error callback on Android when an existing participant needs a backend-issued participant token.
+- Native dependencies: GrowSurfSDK 0.9.0 and com.growsurf:growsurf-android-sdk:0.9.1.
+
 ## 0.1.0
 
 - Add referral and affiliate programs to bare React Native apps and Expo development builds, with React Native 0.74 and newer.
