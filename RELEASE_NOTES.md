@@ -1,5 +1,11 @@
 # Release notes
 
+## 0.2.0
+
+- Adds the optional referral status filter and starter reward icon fields.
+- Updates the native GrowSurf Window with referral status badges, status tooltips, sorting, filtering, and reward icon plates.
+- Native dependencies: GrowSurfSDK 0.10.0 and com.growsurf:growsurf-android-sdk:0.10.0.
+
 ## 0.1.1
 
 - Reports `MISSING_PARTICIPANT_TOKEN` through the Window error callback on Android when an existing participant needs a backend-issued participant token.
