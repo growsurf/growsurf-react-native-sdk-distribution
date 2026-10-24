@@ -1,5 +1,10 @@
 # Release notes
 
+## 0.2.1
+
+- Documents direct GitHub podspec installation for CocoaPods and Expo.
+- Native dependencies: GrowSurfSDK 0.10.0 and com.growsurf:growsurf-android-sdk:0.10.0.
+
 ## 0.2.0
 
 - Adds the optional referral status filter and starter reward icon fields.

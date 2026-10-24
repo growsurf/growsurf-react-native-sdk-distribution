@@ -10,21 +10,48 @@ React Native 0.74 and newer support both architectures where React Native offers
 npm install growsurf-react-native-sdk
 ```
 
-For a bare iOS app, run `pod install` in its `ios` directory. Use `pod install --repo-update` if CocoaPods cannot resolve the pinned GrowSurf SDK.
+For a bare iOS app, add this line inside your app target in `ios/Podfile`, then run `pod install` in the `ios` directory:
+
+```ruby
+pod 'GrowSurfSDK', :podspec => 'https://raw.githubusercontent.com/growsurf/growsurf-ios-sdk-distribution/v0.10.0/GrowSurfSDK.podspec'
+```
+
+This downloads the podspec from GitHub without using CocoaPods Trunk. The `0.10.0` version must match the native iOS version pinned by your installed React Native SDK. Update this URL when that pin changes.
 
 iOS requires iOS 15 or newer. Android requires minimum SDK 24, compile SDK 36, and Kotlin 2.1.21 or newer. Use an Android Gradle Plugin version that supports compile SDK 36.
 
-For Expo, add the plugin to your app configuration, then rebuild the development client:
+For Expo, install `expo-build-properties`:
+
+```sh
+npx expo install expo-build-properties
+```
+
+Add the plugins below to your app configuration, then rebuild the development client. If you already use `expo-build-properties`, merge `extraPods` into its existing configuration. Keep the podspec version matched to the native iOS pin, as above:
 
 ```json
 {
   "expo": {
-    "plugins": ["growsurf-react-native-sdk"]
+    "plugins": [
+      "growsurf-react-native-sdk",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "extraPods": [
+              {
+                "name": "GrowSurfSDK",
+                "podspec": "https://raw.githubusercontent.com/growsurf/growsurf-ios-sdk-distribution/v0.10.0/GrowSurfSDK.podspec"
+              }
+            ]
+          }
+        }
+      ]
+    ]
   }
 }
 ```
 
-The plugin adds Android backup and device-transfer exclusions. It keeps your existing rules and merges the GrowSurf exclusions into app-owned XML resources. If the manifest refers to another library's backup XML, copy that XML into your app's `res/xml` directory so the plugin can merge it.
+The GrowSurf plugin adds Android backup and device-transfer exclusions. It keeps your existing rules and merges the GrowSurf exclusions into app-owned XML resources. If the manifest refers to another library's backup XML, copy that XML into your app's `res/xml` directory so the plugin can merge it.
 
 ### React Native 0.74 Android setup
 
@@ -91,7 +118,7 @@ The script keeps Gradle warnings visible and turns off warnings-as-errors only w
 
 ### React Native 0.74 iOS setup
 
-Set your app's iOS deployment target and the `platform :ios` value in its Podfile to `15.0` or newer. Run `pod install --repo-update`.
+Set your app's iOS deployment target and the `platform :ios` value in its Podfile to `15.0` or newer. Run `pod install` after adding the GitHub podspec from the Install section.
 
 React Native 0.74 can retain its older `13.4` target for Pods. For a command-line build, include `IPHONEOS_DEPLOYMENT_TARGET=15.0` so the Pods also compile for iOS 15. Replace the workspace and scheme with your app's names:
 
