@@ -13,10 +13,10 @@ npm install growsurf-react-native-sdk
 For a bare iOS app, add this line inside your app target in `ios/Podfile`, then run `pod install` in the `ios` directory:
 
 ```ruby
-pod 'GrowSurfSDK', :podspec => 'https://raw.githubusercontent.com/growsurf/growsurf-ios-sdk-distribution/v0.10.0/GrowSurfSDK.podspec'
+pod 'GrowSurfSDK', :podspec => 'https://raw.githubusercontent.com/growsurf/growsurf-ios-sdk-distribution/v0.10.2/GrowSurfSDK.podspec'
 ```
 
-This downloads the podspec from GitHub without using CocoaPods Trunk. The `0.10.0` version must match the native iOS version pinned by your installed React Native SDK. Update this URL when that pin changes.
+This downloads the podspec from GitHub without using CocoaPods Trunk. The `0.10.2` version must match the native iOS version pinned by your installed React Native SDK. Update this URL when that pin changes.
 
 iOS requires iOS 15 or newer. Android requires minimum SDK 24, compile SDK 36, and Kotlin 2.1.21 or newer. Use an Android Gradle Plugin version that supports compile SDK 36.
 
@@ -40,7 +40,7 @@ Add the plugins below to your app configuration, then rebuild the development cl
             "extraPods": [
               {
                 "name": "GrowSurfSDK",
-                "podspec": "https://raw.githubusercontent.com/growsurf/growsurf-ios-sdk-distribution/v0.10.0/GrowSurfSDK.podspec"
+                "podspec": "https://raw.githubusercontent.com/growsurf/growsurf-ios-sdk-distribution/v0.10.2/GrowSurfSDK.podspec"
               }
             ]
           }
@@ -152,19 +152,22 @@ const links = Linking.addEventListener('url', ({ url }) => {
 Capture a link before calling `addReferredParticipant`. The native SDK keeps pending attribution and applies it during signup. Pass Branch, AppsFlyer, Adjust or Singular callback parameters to `handleAttributionParameters(parameters, provider)`. `handleDeferredDeepLink()` reads Android's Play Install Referrer; iOS rejects it with `UNSUPPORTED_PLATFORM`.
 
 ```ts
-const response = await GrowSurf.addReferredParticipant({
+const result = await GrowSurf.addReferredParticipant({
   email: 'gavin@hooli.com',
   firstName: 'Gavin',
   lastName: 'Belson',
 });
 
-if (response && 'participant' in response) {
-  // Use the API's participant result. The SDK stores any participant token it receives.
-  const participant = response.participant;
+if (result.added && result.participant) {
+  // The SDK stores any participant token it receives.
+  const participant = result.participant;
+} else if (!result.added) {
+  // 'no_referrer', 'invalid_referrer' or 'participant_already_exists'
+  console.log(result.notAddedReason);
 }
 ```
 
-`addParticipant` creates or finds a participant without requiring a referral. Both methods return the API's JSON. The response can require a participant token instead of returning participant data. `addReferredParticipant` returns `null` when no participant-create request succeeds.
+`addReferredParticipant` returns `added`, `validReferral`, `referredBy` and `notAddedReason`, like the native SDKs. When a participant-create request succeeds, the result also has the API's participant fields. `addParticipant` creates or finds a participant without requiring a referral and returns the API's JSON. Either response can require a participant token instead of returning participant data.
 
 ## Open the GrowSurf Window
 

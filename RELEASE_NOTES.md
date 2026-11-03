@@ -1,5 +1,12 @@
 # Release notes
 
+## 0.3.0
+
+- `addReferredParticipant` returns `added`, `validReferral`, `referredBy` and `notAddedReason`, like the native SDKs, with the API's participant fields when signup succeeds. It no longer returns `null`.
+- `trackShare` accepts only the share types the Mobile API accepts. The `participantCreated` Window event types the participant fields that the native SDKs send.
+- Updates the generated Mobile API types. Commission `status` is `PENDING`, `APPROVED`, `PAID` or `REVERSED`. Window share links are `null` when no participant is signed in. Campaign Reward `metadata` is typed.
+- Native dependencies: GrowSurfSDK 0.10.2 and com.growsurf:growsurf-android-sdk:0.10.2.
+
 ## 0.2.1
 
 - Documents direct GitHub podspec installation for CocoaPods and Expo.
