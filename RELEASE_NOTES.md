@@ -1,5 +1,10 @@
 # Release notes
 
+## 0.3.1
+
+- Updates the native GrowSurf Window to show each earned reward description once and hide rewards that are not approved.
+- Native dependencies: GrowSurfSDK 0.10.3 and com.growsurf:growsurf-android-sdk:0.10.3.
+
 ## 0.3.0
 
 - `addReferredParticipant` returns `added`, `validReferral`, `referredBy` and `notAddedReason`, like the native SDKs, with the API's participant fields when signup succeeds. It no longer returns `null`.

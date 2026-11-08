@@ -13,10 +13,10 @@ npm install growsurf-react-native-sdk
 For a bare iOS app, add this line inside your app target in `ios/Podfile`, then run `pod install` in the `ios` directory:
 
 ```ruby
-pod 'GrowSurfSDK', :podspec => 'https://raw.githubusercontent.com/growsurf/growsurf-ios-sdk-distribution/v0.10.2/GrowSurfSDK.podspec'
+pod 'GrowSurfSDK', :podspec => 'https://raw.githubusercontent.com/growsurf/growsurf-ios-sdk-distribution/v0.10.3/GrowSurfSDK.podspec'
 ```
 
-This downloads the podspec from GitHub without using CocoaPods Trunk. The `0.10.2` version must match the native iOS version pinned by your installed React Native SDK. Update this URL when that pin changes.
+This downloads the podspec from GitHub without using CocoaPods Trunk. The `0.10.3` version must match the native iOS version pinned by your installed React Native SDK. Update this URL when that pin changes.
 
 iOS requires iOS 15 or newer. Android requires minimum SDK 24, compile SDK 36, and Kotlin 2.1.21 or newer. Use an Android Gradle Plugin version that supports compile SDK 36.
 
@@ -40,7 +40,7 @@ Add the plugins below to your app configuration, then rebuild the development cl
             "extraPods": [
               {
                 "name": "GrowSurfSDK",
-                "podspec": "https://raw.githubusercontent.com/growsurf/growsurf-ios-sdk-distribution/v0.10.2/GrowSurfSDK.podspec"
+                "podspec": "https://raw.githubusercontent.com/growsurf/growsurf-ios-sdk-distribution/v0.10.3/GrowSurfSDK.podspec"
               }
             ]
           }
