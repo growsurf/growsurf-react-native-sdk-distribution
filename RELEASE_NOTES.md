@@ -1,5 +1,10 @@
 # Release notes
 
+## 0.3.3
+
+- Adds optional `groupCode` to attribution: the reward group signup code (`grsf_group`) from a referral link.
+- Native dependencies: GrowSurfSDK 0.10.4 and com.growsurf:growsurf-android-sdk:0.10.4.
+
 ## 0.3.1
 
 - Updates the native GrowSurf Window to show each earned reward description once and hide rewards that are not approved.
